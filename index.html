@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Marketing Agency</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for the agency website */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+        }
+        .page-section {
+            min-height: calc(100vh - 4rem); /* Adjust for header height */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            /* Ensure content can scroll within the section for scroll depth tracking */
+            overflow-y: auto;
+        }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+        .service-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- IMPORTANT: Replace 'G-JQCZXXDVEK' with your actual Google Analytics 4 Measurement ID (e.g., G-XXXXXXXXXX) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQCZXXDVEK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        // Configure gtag with your GA4 Measurement ID
+        gtag('config', 'G-JQCZXXDVEK');
+
+        // Global variable to track scroll depth percentages already sent for the current page view
+        let sentScrollDepths = {
+            'landing-page': { '25': false, '50': false, '75': false, '90': false },
+            'services-page': { '25': false, '50': false, '75': false, '90': false },
+            'contact-us-page': { '25': false, '50': false, '75': false, '90': false }
+        };
+        let currentPageId = 'landing-page'; // Keep track of the currently active page
+
+        /**
+         * Sends a custom 'page_view' event for SPA navigation.
+         * @param {string} pageId The ID of the page section being viewed.
+         */
+        function trackPageView(pageId) {
+            let pageTitle = '';
+            let pagePath = '';
+
+            switch (pageId) {
+                case 'landing-page':
+                    pageTitle = 'DigitalEdge - Home Page';
+                    pagePath = '/';
+                    break;
+                case 'services-page':
+                    pageTitle = 'DigitalEdge - Services';
+                    pagePath = '/services';
+                    break;
+                case 'contact-us-page':
+                    pageTitle = 'DigitalEdge - Contact Us';
+                    pagePath = '/contact';
+                    break;
+                default:
+                    pageTitle = 'DigitalEdge - Unknown Page';
+                    pagePath = '/unknown';
+            }
+
+            if (typeof gtag === 'function') {
+                gtag('event', 'page_view', {
+                    page_title: pageTitle,
+                    page_location: window.location.origin + pagePath, // Simulate URL change
+                    page_path: pagePath
+                });
+                console.log(`gtag: Sent page_view for ${pageTitle} (${pagePath})`);
+            }
+
+            // Reset scroll depth tracking for the new page
+            for (const key in sentScrollDepths[pageId]) {
+                sentScrollDepths[pageId][key] = false;
+            }
+            currentPageId = pageId; // Update current page ID for scroll tracking
+        }
+
+        // Initial page view event when the page first loads
+        document.addEventListener('DOMContentLoaded', () => {
+            trackPageView('landing-page');
+        });
+    </script>
+</head>
+<body>
+
+    <!-- Header / Navigation Bar -->
+    <header class="bg-white shadow-lg py-4 px-6 flex justify-between items-center sticky top-0 z-50">
+        <h1 class="text-3xl font-bold text-blue-800">
+            <a href="#" onclick="showPage('landing-page'); return false;">DigitalEdge</a>
+        </h1>
+        <nav>
+            <ul class="flex space-x-6">
+                <li><a href="#" onclick="showPage('landing-page'); return false;" class="text-gray-700 hover:text-blue-600 font-medium text-lg">Home</a></li>
+                <li><a href="#" onclick="showPage('services-page'); return false;" class="text-gray-700 hover:text-blue-600 font-medium text-lg">Services</a></li>
+                <li><a href="#" onclick="showPage('contact-us-page'); return false;" class="text-gray-700 hover:text-blue-600 font-medium text-lg">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Landing Page Section -->
+    <section id="landing-page" class="page-section bg-gradient-to-r from-blue-500 to-purple-600 text-white flex items-center justify-center text-center">
+        <div class="container py-20">
+            <h2 class="text-6xl font-extrabold mb-6 leading-tight animate-fade-in-up">
+                Elevate Your Online Presence
+            </h2>
+            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto animate-fade-in-up delay-200">
+                We craft data-driven digital strategies to help your business thrive in the competitive online landscape.
+            </p>
+            <button id="cta-landing-consultation" onclick="showPage('contact-us-page')" class="bg-white text-blue-700 font-bold py-4 px-10 rounded-full shadow-xl hover:bg-gray-100 transform transition duration-300 hover:scale-105 animate-fade-in-up delay-400">
+                Get a Free Consultation
+            </button>
+
+            <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-100">
+                <div class="p-6 bg-white bg-opacity-10 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold mb-3">Strategic Approach</h3>
+                    <p class="text-lg">Customized plans tailored to your unique business goals.</p>
+                </div>
+                <div class="p-6 bg-white bg-opacity-10 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold mb-3">Proven Results</h3>
+                    <p class="text-lg">Driving measurable growth and ROI for our clients.</p>
+                </div>
+                <div class="p-6 bg-white bg-opacity-10 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold mb-3">Expert Team</h3>
+                    <p class="text-lg">Dedicated professionals passionate about digital marketing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Page Section -->
+    <section id="services-page" class="page-section hidden bg-gray-100">
+        <div class="container py-12">
+            <h2 class="text-5xl font-bold text-gray-900 mb-12 text-center">Our Core Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Service Card: SEO -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center">
+                    <img src="https://placehold.co/100x100/E0F7FA/00796B?text=SEO" alt="SEO Icon" class="mx-auto mb-6 rounded-full">
+                    <h3 class="text-3xl font-semibold text-gray-800 mb-4">Search Engine Optimization (SEO)</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Improve your website's visibility on search engines and drive organic traffic with our expert SEO strategies.
+                    </p>
+                </div>
+                <!-- Service Card: PPC -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center">
+                    <img src="https://placehold.co/100x100/FFF3E0/E65100?text=PPC" alt="PPC Icon" class="mx-auto mb-6 rounded-full">
+                    <h3 class="text-3xl font-semibold text-gray-800 mb-4">Pay-Per-Click (PPC) Advertising</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Maximize your ad spend and reach your target audience instantly with highly optimized PPC campaigns.
+                    </p>
+                </div>
+                <!-- Service Card: Social Media Marketing -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center">
+                    <img src="https://placehold.co/100x100/E8F5E9/2E7D32?text=Social" alt="Social Media Icon" class="mx-auto mb-6 rounded-full">
+                    <h3 class="text-3xl font-semibold text-gray-800 mb-4">Social Media Marketing</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Build strong brand presence and engage with your customers on popular social media platforms.
+                    </p>
+                </div>
+                <!-- Service Card: Content Marketing -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center">
+                    <img src="https://placehold.co/100x100/F3E5F5/4A148C?text=Content" alt="Content Icon" class="mx-auto mb-6 rounded-full">
+                    <h3 class="text-3xl font-semibold text-gray-800 mb-4">Content Marketing</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Create valuable, relevant content that attracts, engages, and converts your audience into loyal customers.
+                    </p>
+                </div>
+                <!-- Service Card: Web Design & Development -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center">
+                    <img src="https://placehold.co/100x100/E1F5FE/01579B?text=Web" alt="Web Design Icon" class="mx-auto mb-6 rounded-full">
+                    <h3 class="text-3xl font-semibold text-gray-800 mb-4">Web Design & Development</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Craft stunning, user-friendly websites that are optimized for performance and conversions.
+                    </p>
+                </div>
+                <!-- Service Card: Email Marketing -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center">
+                    <img src="https://placehold.co/100x100/FFE0B2/FF6F00?text=Email" alt="Email Icon" class="mx-auto mb-6 rounded-full">
+                    <h3 class="text-3xl font-semibold text-gray-800 mb-4">Email Marketing</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Develop effective email campaigns to nurture leads, drive sales, and build customer loyalty.
+                    </p>
+                </div>
+            </div>
+            <div class="text-center mt-16">
+                <button id="cta-services-contact" onclick="showPage('contact-us-page')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105">
+                    Ready to Grow? Contact Us!
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Page Section -->
+    <section id="contact-us-page" class="page-section hidden bg-white">
+        <div class="container py-12 flex flex-col lg:flex-row items-center lg:items-start lg:space-x-12">
+            <div class="lg:w-1/2 mb-10 lg:mb-0">
+                <h2 class="text-5xl font-bold text-gray-900 mb-8">Get In Touch</h2>
+                <p class="text-gray-700 text-lg mb-8 leading-relaxed">
+                    Have questions or ready to start your next digital project? Fill out the form below or reach out to us directly. We're excited to hear from you!
+                </p>
+                <div class="space-y-6 text-lg text-gray-800">
+                    <p class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> info@digitaledge.com</p>
+                    <p class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg> +1 (555) 123-4567</p>
+                    <p class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg> 123 Digital Way, Suite 400, Marketing City, DM 98765</p>
+                </div>
+                <!-- Hypothetical Download Link -->
+                <p class="mt-8 text-center">
+                    <a href="/assets/DigitalEdge_Brochure.pdf" id="download-brochure" class="text-blue-600 hover:underline font-semibold flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L10 11.586l1.293-1.293a1 1 0 111.414 1.414l-2 2a1 1 0 01-1.414 0l-2-2a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v7a1 1 0 11-2 0V4a1 1 0 011-1z" clip-rule="evenodd" />
+                        </svg>
+                        Download Our Brochure (PDF)
+                    </a>
+                </p>
+            </div>
+            <div class="lg:w-1/2 w-full bg-gray-50 p-8 rounded-lg shadow-xl">
+                <form id="contact-form" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Your Name</label>
+                        <input type="text" id="name" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="John Doe" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Your Email</label>
+                        <input type="email" id="email" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="john.doe@example.com" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message</label>
+                        <textarea id="message" rows="6" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Tell us about your project or inquiry..." required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 text-center">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2023 DigitalEdge. All rights reserved.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-white">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Modal for Alerts (reused from previous example) -->
+    <div id="custom-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full text-center">
+            <p id="modal-message" class="text-lg font-semibold text-gray-800 mb-6"></p>
+            <button onclick="hideModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded-lg shadow transition duration-300">
+                OK
+            </button>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Shows a specific page section and hides all others.
+         * Also triggers a virtual page view event for gtag.js.
+         * @param {string} pageId The ID of the page section to show.
+         */
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => page.classList.add('hidden')); // Hide all pages
+            document.getElementById(pageId).classList.remove('hidden'); // Show the target page
+            window.scrollTo(0, 0); // Scroll to top of the page
+
+            // Track virtual page view
+            trackPageView(pageId);
+        }
+
+        /**
+         * Displays a custom modal with a given message.
+         * @param {string} message The message to display in the modal.
+         */
+        function showModal(message) {
+            document.getElementById('modal-message').textContent = message;
+            document.getElementById('custom-modal').classList.remove('hidden');
+        }
+
+        /**
+         * Hides the custom modal.
+         */
+        function hideModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+        // --- Event Listeners and Initial Setup ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initially show the landing page
+            showPage('landing-page'); // This will trigger the initial page_view event
+
+            // Event listener for the contact form submission
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Prevent default form submission
+
+                    // In a real application, you would send this data to a server
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+
+                    console.log('Contact Form Submitted:');
+                    console.log('Name:', name);
+                    console.log('Email:', email);
+                    console.log('Message:', message);
+
+                    // --- gtag.js: Track form submission ---
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'form_submit', {
+                            event_category: 'engagement',
+                            event_label: 'Contact Form Submission',
+                            form_id: 'contact-form',
+                            name: name,
+                            email: email // Be cautious with sending PII directly to GA
+                        });
+                        console.log('gtag: Sent form_submit event.');
+                    }
+
+                    showModal('Thank you for your message! We will get back to you soon.');
+                    contactForm.reset(); // Clear the form fields
+                });
+            }
+
+            // --- gtag.js: Track CTA Clicks ---
+            const ctaLandingConsultation = document.getElementById('cta-landing-consultation');
+            if (ctaLandingConsultation) {
+                ctaLandingConsultation.addEventListener('click', function() {
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'cta_click', {
+                            event_category: 'engagement',
+                            event_label: 'Get a Free Consultation - Landing Page',
+                            button_text: this.textContent.trim(),
+                            button_class: this.className,
+                            page_path: '/'
+                        });
+                        console.log('gtag: Sent CTA click event from Landing Page.');
+                    }
+                });
+            }
+
+            const ctaServicesContact = document.getElementById('cta-services-contact');
+            if (ctaServicesContact) {
+                ctaServicesContact.addEventListener('click', function() {
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'cta_click', {
+                            event_category: 'engagement',
+                            event_label: 'Ready to Grow? Contact Us! - Services Page',
+                            button_text: this.textContent.trim(),
+                            button_class: this.className,
+                            page_path: '/services'
+                        });
+                        console.log('gtag: Sent CTA click event from Services Page.');
+                    }
+                });
+            }
+
+            // --- gtag.js: Track Downloads (Hypothetical) ---
+            const downloadBrochureLink = document.getElementById('download-brochure');
+            if (downloadBrochureLink) {
+                downloadBrochureLink.addEventListener('click', function(event) {
+                    // event.preventDefault(); // Uncomment if you want to track without actual download
+                    if (typeof gtag === 'function') {
+                        const fileUrl = this.href;
+                        const fileName = fileUrl.substring(fileUrl.lastIndexOf('/') + 1);
+                        const fileExtension = fileName.split('.').pop();
+
+                        gtag('event', 'file_download', {
+                            event_category: 'engagement',
+                            event_label: `Brochure Download - ${fileName}`,
+                            file_name: fileName,
+                            file_extension: fileExtension,
+                            file_url: fileUrl
+                        });
+                        console.log(`gtag: Sent file_download event for ${fileName}.`);
+                    }
+                });
+            }
+
+            // --- gtag.js: Track Scroll Depth ---
+            // This listener will fire for the currently visible page section
+            window.addEventListener('scroll', () => {
+                const currentSection = document.getElementById(currentPageId);
+                if (!currentSection) return;
+
+                const scrollHeight = currentSection.scrollHeight;
+                const scrollTop = currentSection.scrollTop;
+                const clientHeight = currentSection.clientHeight;
+
+                // Calculate scroll percentage within the current section
+                let scrollPercent = 0;
+                if (scrollHeight > clientHeight) { // Only calculate if content is scrollable
+                    scrollPercent = (scrollTop / (scrollHeight - clientHeight)) * 100;
+                }
+
+                const percentages = [25, 50, 75, 90];
+                percentages.forEach(percent => {
+                    if (scrollPercent >= percent && !sentScrollDepths[currentPageId][percent]) {
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'scroll_depth', {
+                                event_category: 'engagement',
+                                event_label: `Scrolled to ${percent}% of ${currentPageId}`,
+                                percent_scrolled: percent,
+                                page_path: window.location.origin + '/' + currentPageId.replace('-page', '') // Adjust path for clarity
+                            });
+                            console.log(`gtag: Sent scroll_depth event for ${percent}% on ${currentPageId}.`);
+                        }
+                        sentScrollDepths[currentPageId][percent] = true; // Mark as sent
+                    }
+                });
+            }, { passive: true }); // Use passive listener for better performance
+        });
+    </script>
+</body>
+</html>
