@@ -20,7 +20,7 @@
             align-items: center;
             padding: 2rem;
             /* Ensure content can scroll within the section for scroll depth tracking */
-            overflow-y: auto;
+            overflow-y: auto; /* Added for scroll tracking to function properly on sections */
         }
         .container {
             max-width: 1200px;
@@ -28,10 +28,23 @@
         }
         .service-card {
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: pointer; /* Indicate that the card is clickable */
         }
         .service-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        /* Styling for service cards on the landing page */
+        .landing-service-card {
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+            color: #333; /* Darker text for contrast */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .landing-service-card h3 {
+            color: #1a202c; /* Darker heading color */
+        }
+        .landing-service-card p {
+            color: #4a5568; /* Darker paragraph color */
         }
     </style>
 
@@ -127,9 +140,7 @@
             <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto animate-fade-in-up delay-200">
                 We craft data-driven digital strategies to help your business thrive in the competitive online landscape.
             </p>
-            <button id="cta-landing-consultation" onclick="showPage('contact-us-page')" class="bg-white text-blue-700 font-bold py-4 px-10 rounded-full shadow-xl hover:bg-gray-100 transform transition duration-300 hover:scale-105 animate-fade-in-up delay-400">
-                Get a Free Consultation
-            </button>
+            <!-- Removed: Get a Free Consultation button -->
 
             <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-100">
                 <div class="p-6 bg-white bg-opacity-10 rounded-lg shadow-md">
@@ -145,68 +156,79 @@
                     <p class="text-lg">Dedicated professionals passionate about digital marketing.</p>
                 </div>
             </div>
+
+            <!-- Our Core Services section - now on Landing Page -->
+            <div class="mt-20 py-12 bg-white rounded-xl shadow-2xl text-gray-900">
+                <h2 class="text-5xl font-bold mb-12 text-center">Our Core Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-8">
+                    <!-- Service Card: SEO -->
+                    <div onclick="showPage('contact-us-page')" class="service-card landing-service-card rounded-xl shadow-lg p-8 text-center service-seo">
+                        <img src="https://placehold.co/100x100/E0F7FA/00796B?text=SEO" alt="SEO Icon" class="mx-auto mb-6 rounded-full">
+                        <h3 class="text-3xl font-semibold mb-4">Search Engine Optimization (SEO)</h3>
+                        <p class="leading-relaxed">
+                            Improve your website's visibility on search engines and drive organic traffic with our expert SEO strategies.
+                        </p>
+                    </div>
+                    <!-- Service Card: PPC -->
+                    <div onclick="showPage('contact-us-page')" class="service-card landing-service-card rounded-xl shadow-lg p-8 text-center service-ppc">
+                        <img src="https://placehold.co/100x100/FFF3E0/E65100?text=PPC" alt="PPC Icon" class="mx-auto mb-6 rounded-full">
+                        <h3 class="text-3xl font-semibold mb-4">Pay-Per-Click (PPC) Advertising</h3>
+                        <p class="leading-relaxed">
+                            Maximize your ad spend and reach your target audience instantly with highly optimized PPC campaigns.
+                        </p>
+                    </div>
+                    <!-- Service Card: Social Media Marketing -->
+                    <div onclick="showPage('contact-us-page')" class="service-card landing-service-card rounded-xl shadow-lg p-8 text-center service-social">
+                        <img src="https://placehold.co/100x100/E8F5E9/2E7D32?text=Social" alt="Social Media Icon" class="mx-auto mb-6 rounded-full">
+                        <h3 class="text-3xl font-semibold mb-4">Social Media Marketing</h3>
+                        <p class="leading-relaxed">
+                            Build strong brand presence and engage with your customers on popular social media platforms.
+                        </p>
+                    </div>
+                    <!-- Service Card: Content Marketing -->
+                    <div onclick="showPage('contact-us-page')" class="service-card landing-service-card rounded-xl shadow-lg p-8 text-center service-content">
+                        <img src="https://placehold.co/100x100/F3E5F5/4A148C?text=Content" alt="Content Icon" class="mx-auto mb-6 rounded-full">
+                        <h3 class="text-3xl font-semibold mb-4">Content Marketing</h3>
+                        <p class="leading-relaxed">
+                            Create valuable, relevant content that attracts, engages, and converts your audience into loyal customers.
+                        </p>
+                    </div>
+                    <!-- Service Card: Web Design & Development -->
+                    <div onclick="showPage('contact-us-page')" class="service-card landing-service-card rounded-xl shadow-lg p-8 text-center service-web">
+                        <img src="https://placehold.co/100x100/E1F5FE/01579B?text=Web" alt="Web Design Icon" class="mx-auto mb-6 rounded-full">
+                        <h3 class="text-3xl font-semibold mb-4">Web Design & Development</h3>
+                        <p class="leading-relaxed">
+                            Craft stunning, user-friendly websites that are optimized for performance and conversions.
+                        </p>
+                    </div>
+                    <!-- Service Card: Email Marketing -->
+                    <div onclick="showPage('contact-us-page')" class="service-card landing-service-card rounded-xl shadow-lg p-8 text-center service-email">
+                        <img src="https://placehold.co/100x100/FFE0B2/FF6F00?text=Email" alt="Email Icon" class="mx-auto mb-6 rounded-full">
+                        <h3 class="text-3xl font-semibold mb-4">Email Marketing</h3>
+                        <p class="leading-relaxed">
+                            Develop effective email campaigns to nurture leads, drive sales, and build customer loyalty.
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center mt-16">
+                    <button id="cta-landing-services-contact" onclick="showPage('contact-us-page')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105">
+                        Discuss Your Project Now!
+                    </button>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Services Page Section -->
-    <section id="services-page" class="page-section hidden bg-gray-100">
+    <!-- Services Page Section - Now a placeholder -->
+    <section id="services-page" class="page-section hidden bg-gray-100 flex items-center justify-center text-center">
         <div class="container py-12">
-            <h2 class="text-5xl font-bold text-gray-900 mb-12 text-center">Our Core Services</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- Service Card: SEO -->
-                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center">
-                    <img src="https://placehold.co/100x100/E0F7FA/00796B?text=SEO" alt="SEO Icon" class="mx-auto mb-6 rounded-full">
-                    <h3 class="text-3xl font-semibold text-gray-800 mb-4">Search Engine Optimization (SEO)</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Improve your website's visibility on search engines and drive organic traffic with our expert SEO strategies.
-                    </p>
-                </div>
-                <!-- Service Card: PPC -->
-                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center">
-                    <img src="https://placehold.co/100x100/FFF3E0/E65100?text=PPC" alt="PPC Icon" class="mx-auto mb-6 rounded-full">
-                    <h3 class="text-3xl font-semibold text-gray-800 mb-4">Pay-Per-Click (PPC) Advertising</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Maximize your ad spend and reach your target audience instantly with highly optimized PPC campaigns.
-                    </p>
-                </div>
-                <!-- Service Card: Social Media Marketing -->
-                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center">
-                    <img src="https://placehold.co/100x100/E8F5E9/2E7D32?text=Social" alt="Social Media Icon" class="mx-auto mb-6 rounded-full">
-                    <h3 class="text-3xl font-semibold text-gray-800 mb-4">Social Media Marketing</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Build strong brand presence and engage with your customers on popular social media platforms.
-                    </p>
-                </div>
-                <!-- Service Card: Content Marketing -->
-                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center">
-                    <img src="https://placehold.co/100x100/F3E5F5/4A148C?text=Content" alt="Content Icon" class="mx-auto mb-6 rounded-full">
-                    <h3 class="text-3xl font-semibold text-gray-800 mb-4">Content Marketing</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Create valuable, relevant content that attracts, engages, and converts your audience into loyal customers.
-                    </p>
-                </div>
-                <!-- Service Card: Web Design & Development -->
-                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center">
-                    <img src="https://placehold.co/100x100/E1F5FE/01579B?text=Web" alt="Web Design Icon" class="mx-auto mb-6 rounded-full">
-                    <h3 class="text-3xl font-semibold text-gray-800 mb-4">Web Design & Development</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Craft stunning, user-friendly websites that are optimized for performance and conversions.
-                    </p>
-                </div>
-                <!-- Service Card: Email Marketing -->
-                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center">
-                    <img src="https://placehold.co/100x100/FFE0B2/FF6F00?text=Email" alt="Email Icon" class="mx-auto mb-6 rounded-full">
-                    <h3 class="text-3xl font-semibold text-gray-800 mb-4">Email Marketing</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Develop effective email campaigns to nurture leads, drive sales, and build customer loyalty.
-                    </p>
-                </div>
-            </div>
-            <div class="text-center mt-16">
-                <button id="cta-services-contact" onclick="showPage('contact-us-page')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105">
-                    Ready to Grow? Contact Us!
-                </button>
-            </div>
+            <h2 class="text-5xl font-bold text-gray-900 mb-8">Our Services</h2>
+            <p class="text-xl text-gray-700 mb-10 max-w-2xl mx-auto">
+                Our core digital marketing services are highlighted directly on our <a href="#" onclick="showPage('landing-page'); return false;" class="text-blue-600 hover:underline">Home Page</a>.
+            </p>
+            <button onclick="showPage('landing-page')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105">
+                Go to Home Page
+            </button>
         </div>
     </section>
 
@@ -338,8 +360,8 @@
                             event_category: 'engagement',
                             event_label: 'Contact Form Submission',
                             form_id: 'contact-form',
-                            name: name,
-                            email: email // Be cautious with sending PII directly to GA
+                            page_path: '/contact' // Assuming this form is on the contact page
+                            // Be cautious with sending PII directly to GA (e.g., name, email)
                         });
                         console.log('gtag: Sent form_submit event.');
                     }
@@ -349,38 +371,42 @@
                 });
             }
 
-            // --- gtag.js: Track CTA Clicks ---
-            const ctaLandingConsultation = document.getElementById('cta-landing-consultation');
-            if (ctaLandingConsultation) {
-                ctaLandingConsultation.addEventListener('click', function() {
+            // --- gtag.js: Track CTA Clicks (General) ---
+            // This will track clicks on the "Discuss Your Project Now!" button
+            const ctaLandingServicesContact = document.getElementById('cta-landing-services-contact');
+            if (ctaLandingServicesContact) {
+                ctaLandingServicesContact.addEventListener('click', function() {
                     if (typeof gtag === 'function') {
                         gtag('event', 'cta_click', {
                             event_category: 'engagement',
-                            event_label: 'Get a Free Consultation - Landing Page',
+                            event_label: 'Discuss Your Project Now! - Landing Page Services Section',
                             button_text: this.textContent.trim(),
                             button_class: this.className,
                             page_path: '/'
                         });
-                        console.log('gtag: Sent CTA click event from Landing Page.');
+                        console.log('gtag: Sent CTA click event from Landing Page Services Section.');
                     }
                 });
             }
 
-            const ctaServicesContact = document.getElementById('cta-services-contact');
-            if (ctaServicesContact) {
-                ctaServicesContact.addEventListener('click', function() {
+            // --- gtag.js: Track Service Card Clicks ---
+            // Select all service cards that are clickable and lead to the contact page
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const serviceName = this.querySelector('h3').textContent.trim();
                     if (typeof gtag === 'function') {
-                        gtag('event', 'cta_click', {
+                        gtag('event', 'service_card_click', {
                             event_category: 'engagement',
-                            event_label: 'Ready to Grow? Contact Us! - Services Page',
-                            button_text: this.textContent.trim(),
-                            button_class: this.className,
-                            page_path: '/services'
+                            event_label: `Service Card Click: ${serviceName}`,
+                            service_name: serviceName,
+                            card_classes: this.className,
+                            page_path: '/' // Since these are on the landing page
                         });
-                        console.log('gtag: Sent CTA click event from Services Page.');
+                        console.log(`gtag: Sent service_card_click for ${serviceName}.`);
                     }
                 });
-            }
+            });
+
 
             // --- gtag.js: Track Downloads (Hypothetical) ---
             const downloadBrochureLink = document.getElementById('download-brochure');
@@ -397,7 +423,8 @@
                             event_label: `Brochure Download - ${fileName}`,
                             file_name: fileName,
                             file_extension: fileExtension,
-                            file_url: fileUrl
+                            file_url: fileUrl,
+                            page_path: '/contact' // Assuming this link is on the contact page
                         });
                         console.log(`gtag: Sent file_download event for ${fileName}.`);
                     }
